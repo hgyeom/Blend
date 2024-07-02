@@ -2,6 +2,7 @@ import { GeistSans } from 'geist/font/sans';
 import './globals.css';
 
 import { ThemeProvider } from '@/components/theme-provider';
+import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 const defaultUrl = process.env.VERCEL_URL
@@ -30,6 +31,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Header />
             {children}
             <Footer />
           </ThemeProvider>

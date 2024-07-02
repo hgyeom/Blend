@@ -1,62 +1,37 @@
-import Link from 'next/link';
-import { headers } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
+'use client';
 import { SubmitButton } from './submit-button';
+import { Button } from '@/components/ui/button';
+
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
+import { signIn, signUp } from '@/utils/supabase/actions';
+import { supabaseBrowser } from '@/utils/supabase/client';
 
 export default function Login({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const signIn = async (formData: FormData) => {
-    'use server';
-
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return redirect('/login?message=Could not authenticate user');
-    }
-
-    return redirect('/');
-  };
-
-  const signUp = async (formData: FormData) => {
-    'use server';
-
-    const origin = headers().get('origin');
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
+  const handleLoginWithOAuth = (provider: 'github' | 'google') => {
+    const supabase = supabaseBrowser();
+    supabase.auth.signInWithOAuth({
+      provider,
       options: {
-        emailRedirectTo: `${origin}/auth/callback`,
+        redirectTo: `${location.origin}/auth/callback`,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
       },
     });
-
-    if (error) {
-      return redirect('/login?message=Could not authenticate user');
-    }
-
-    return redirect('/login?message=Check email to continue sign in process');
   };
 
   return (
     <div className="flex items-center justify-center w-full h-screen">
       <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-        <Link
+        {/* <Link
           href="/"
-          className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+          className="absolute left-8 top-11 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +48,7 @@ export default function Login({
             <polyline points="15 18 9 12 15 6" />
           </svg>
           Back
-        </Link>
+        </Link> */}
 
         <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
           <label className="text-md" htmlFor="email">
@@ -83,6 +58,15 @@ export default function Login({
             className="rounded-md px-4 py-2 bg-inherit border mb-6"
             name="email"
             placeholder="you@example.com"
+            required
+          />
+          <label className="text-md" htmlFor="Nickname">
+            Nickname
+          </label>
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            name="Nickname"
+            placeholder="ABC"
             required
           />
           <label className="text-md" htmlFor="password">
@@ -115,6 +99,25 @@ export default function Login({
             </p>
           )}
         </form>
+        <div className="flex flex-col items-center gap-2">
+          SNS계정으로 로그인
+          <div className="flex gap-3">
+            <Button
+              className="w-full flex items-center gap-2"
+              variant="outline"
+              onClick={() => handleLoginWithOAuth('google')}
+            >
+              <FcGoogle /> Google
+            </Button>
+            <Button
+              className="w-full flex items-center gap-2 "
+              variant="outline"
+              onClick={() => handleLoginWithOAuth('github')}
+            >
+              <FaGithub /> Github
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

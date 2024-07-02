@@ -1,12 +1,11 @@
 // protected 마이페이지로 사용 > 이름 변경하기
 
 import AuthButton from '@/components/AuthButton';
-import { createClient } from '@/utils/supabase/server';
-import Header from '@/components/Header';
+import { supabaseServer } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
 export default async function ProtectedPage() {
-  const supabase = createClient();
+  const supabase = supabaseServer();
 
   const {
     data: { user },
@@ -18,7 +17,7 @@ export default async function ProtectedPage() {
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <div className="w-full">
+      {/* <div className="w-full">
         <div className="py-6 font-bold bg-purple-950 text-center">
           This is a protected page that you can only see as an authenticated
           user
@@ -35,7 +34,7 @@ export default async function ProtectedPage() {
         <main className="flex-1 flex flex-col gap-6">
           <h2 className="font-bold text-4xl mb-4">중간 지점</h2>
         </main>
-      </div>
+      </div> */}
     </div>
   );
 }
