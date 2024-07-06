@@ -2,11 +2,10 @@
 import Link from 'next/link'
 import { GiCoffeePot } from 'react-icons/gi'
 
-import { AuthButton } from '@/components/AuthButton'
-import { ModeToggle } from '@/components/ModeToggle'
+import AuthButton from '@/components/AuthButton'
+import ModeToggle from '@/components/ModeToggle'
 
-// header 말고 적당한 이름 찾기
-export const Header = () => {
+const Header = () => {
   return (
     <nav className="w-full flex justify-center items-center border-b border-b-foreground/10 h-14">
       <Link href="/">
@@ -21,3 +20,5 @@ export const Header = () => {
     </nav>
   )
 }
+
+export default Header

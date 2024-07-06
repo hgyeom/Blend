@@ -1,8 +1,9 @@
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 
-import { Footer } from '@/components/layout/Footer'
-import { Header } from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import Header from '@/components/layout/Header'
+import QueryProvider from '@/components/query-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 
 const defaultUrl = process.env.VERCEL_URL
@@ -15,24 +16,29 @@ export const metadata = {
   description: ' Mix, Shared Life',
 }
 
-export const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       {/* suppressHydrationWarning =  hydration warning 무시 */}
       <body className=" text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
+        <QueryProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
-            {children}
-            <Footer />
+            <main className="min-h-screen flex flex-col items-center">
+              {/* <main className="max-w-6xl min-h-screen mx-auto flex flex-col items-center"> */}
+              <Header />
+              {children}
+              <Footer />
+            </main>
           </ThemeProvider>
-        </main>
+        </QueryProvider>
       </body>
     </html>
   )
 }
+
+export default RootLayout

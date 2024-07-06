@@ -6,7 +6,7 @@ import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 
-export const ModeToggle = () => {
+const ModeToggle = () => {
   // setTheme > theme 설정
   // theme > 현재 theme
   const { setTheme, resolvedTheme } = useTheme()
@@ -26,3 +26,5 @@ export const ModeToggle = () => {
     </Button>
   )
 }
+
+export default ModeToggle

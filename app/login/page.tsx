@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button'
 import { signIn, signUp } from '@/utils/supabase/actions'
 import { supabaseBrowser } from '@/utils/supabase/client'
 
-import { SubmitButton } from './submit-button'
+import SubmitButton from './submit-button'
 
-export const Login = ({ searchParams }: { searchParams: { message: string } }) => {
+const Login = ({ searchParams }: { searchParams: { message: string } }) => {
   const handleLoginWithOAuth = (provider: 'github' | 'google') => {
     const supabase = supabaseBrowser()
     supabase.auth.signInWithOAuth({
@@ -122,3 +122,5 @@ export const Login = ({ searchParams }: { searchParams: { message: string } }) =
     </div>
   )
 }
+
+export default Login

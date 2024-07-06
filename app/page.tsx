@@ -2,7 +2,7 @@
 
 import { GiCoffeePot } from 'react-icons/gi'
 
-export const Index = async () => {
+const Index = async () => {
   // supabase와 연결되어있는지 확인하는 함수
   // const canInitSupabaseClient = () => {
   //   // This function is just for the interactive tutorial.
@@ -36,3 +36,5 @@ export const Index = async () => {
     </div>
   )
 }
+
+export default Index

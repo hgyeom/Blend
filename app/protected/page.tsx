@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 // import AuthButton from '@/components/AuthButton'
 import { supabaseServer } from '@/utils/supabase/server'
 
-export const ProtectedPage = async () => {
+const ProtectedPage = async () => {
   const supabase = supabaseServer()
 
   const {
@@ -39,3 +39,4 @@ export const ProtectedPage = async () => {
     </div>
   )
 }
+export default ProtectedPage
