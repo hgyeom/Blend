@@ -1,14 +1,16 @@
-import { supabaseServer } from '@/utils/supabase/server';
-import Link from 'next/link';
-import { Button } from './ui/button';
-import { signOut } from '@/utils/supabase/actions';
+import Link from 'next/link'
 
-export default async function AuthButton() {
-  const supabase = supabaseServer();
+import { signOut } from '@/utils/supabase/actions'
+import { supabaseServer } from '@/utils/supabase/server'
+
+import { Button } from './ui/button'
+
+export const AuthButton = async () => {
+  const supabase = supabaseServer()
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
   return user ? (
     <div className="flex items-center gap-4">
@@ -21,5 +23,5 @@ export default async function AuthButton() {
     <Button variant="outline">
       <Link href="/login">Login</Link>
     </Button>
-  );
+  )
 }

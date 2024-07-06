@@ -1,11 +1,12 @@
 // 'use client';
-import AuthButton from '@/components/AuthButton';
-import ModeToggle from '@/components/ModeToggle';
-import { GiCoffeePot } from 'react-icons/gi';
-import Link from 'next/link';
+import Link from 'next/link'
+import { GiCoffeePot } from 'react-icons/gi'
+
+import { AuthButton } from '@/components/AuthButton'
+import { ModeToggle } from '@/components/ModeToggle'
 
 // header 말고 적당한 이름 찾기
-export default function Header() {
+export const Header = () => {
   return (
     <nav className="w-full flex justify-center items-center border-b border-b-foreground/10 h-14">
       <Link href="/">
@@ -18,5 +19,5 @@ export default function Header() {
         <ModeToggle />
       </div>
     </nav>
-  );
+  )
 }

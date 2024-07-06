@@ -1,8 +1,8 @@
 // import { createClient } from '@/utils/supabase/server';
 
-import { GiCoffeePot } from 'react-icons/gi';
+import { GiCoffeePot } from 'react-icons/gi'
 
-export default async function Index() {
+export const Index = async () => {
   // supabase와 연결되어있는지 확인하는 함수
   // const canInitSupabaseClient = () => {
   //   // This function is just for the interactive tutorial.
@@ -34,5 +34,5 @@ export default async function Index() {
         </main>
       </div>
     </div>
-  );
+  )
 }

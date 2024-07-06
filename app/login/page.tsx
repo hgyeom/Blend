@@ -1,30 +1,29 @@
-'use client';
-import { SubmitButton } from './submit-button';
-import { Button } from '@/components/ui/button';
+'use client'
 
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
-import { signIn, signUp } from '@/utils/supabase/actions';
-import { supabaseBrowser } from '@/utils/supabase/client';
+import { FaGithub } from 'react-icons/fa'
+import { FcGoogle } from 'react-icons/fc'
 
-export default function Login({
-  searchParams,
-}: {
-  searchParams: { message: string };
-}) {
+import { Button } from '@/components/ui/button'
+import { signIn, signUp } from '@/utils/supabase/actions'
+import { supabaseBrowser } from '@/utils/supabase/client'
+
+import { SubmitButton } from './submit-button'
+
+export const Login = ({ searchParams }: { searchParams: { message: string } }) => {
   const handleLoginWithOAuth = (provider: 'github' | 'google') => {
-    const supabase = supabaseBrowser();
+    const supabase = supabaseBrowser()
     supabase.auth.signInWithOAuth({
       provider,
       options: {
+        // eslint-disable-next-line no-restricted-globals
         redirectTo: `${location.origin}/auth/callback`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
         },
       },
-    });
-  };
+    })
+  }
 
   return (
     <div className="flex items-center justify-center w-full h-screen">
@@ -51,34 +50,35 @@ export default function Login({
         </Link> */}
 
         <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
-          <label className="text-md" htmlFor="email">
+          <label htmlFor="email" className="text-md">
             Email
+            <input
+              className="rounded-md px-4 py-2 bg-inherit border mb-6"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
           </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            name="email"
-            placeholder="you@example.com"
-            required
-          />
           <label className="text-md" htmlFor="Nickname">
             Nickname
+            <input
+              className="rounded-md px-4 py-2 bg-inherit border mb-6"
+              name="Nickname"
+              placeholder="ABC"
+              required
+            />
           </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            name="Nickname"
-            placeholder="ABC"
-            required
-          />
           <label className="text-md" htmlFor="password">
             Password
+            <input
+              className="rounded-md px-4 py-2 bg-inherit border mb-6"
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              required
+            />
           </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            required
-          />
           <SubmitButton
             formAction={signIn}
             className="bg-purple-700 text-white rounded-md px-4 py-2 text-foreground mb-2"
@@ -120,5 +120,5 @@ export default function Login({
         </div>
       </div>
     </div>
-  );
+  )
 }

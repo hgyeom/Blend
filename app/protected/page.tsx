@@ -1,18 +1,19 @@
 // protected 마이페이지로 사용 > 이름 변경하기
 
-import AuthButton from '@/components/AuthButton';
-import { supabaseServer } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation'
 
-export default async function ProtectedPage() {
-  const supabase = supabaseServer();
+// import AuthButton from '@/components/AuthButton'
+import { supabaseServer } from '@/utils/supabase/server'
+
+export const ProtectedPage = async () => {
+  const supabase = supabaseServer()
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
   if (!user) {
-    return redirect('/login');
+    return redirect('/login')
   }
 
   return (
@@ -36,5 +37,5 @@ export default async function ProtectedPage() {
         </main>
       </div> */}
     </div>
-  );
+  )
 }

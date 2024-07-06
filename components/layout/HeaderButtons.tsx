@@ -1,12 +1,12 @@
-import AuthButton from '../AuthButton';
-import ModeToggle from '../ModeToggle';
+import { AuthButton } from '../AuthButton'
+import { ModeToggle } from '../ModeToggle'
 
-export default function HeaderButtons() {
+export const HeaderButtons = () => {
   return (
     <div className="w-full max-w-4xl flex justify-end items-center p-3 text-sm gap-4">
       {/* auth 버튼 보여주는게 문제. 어떻게 해결하지? */}
       <AuthButton />
       <ModeToggle />
     </div>
-  );
+  )
 }
