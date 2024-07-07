@@ -2,7 +2,7 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 
 import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import Navbar from '@/components/layout/Navbar'
 import QueryProvider from '@/components/query-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -30,7 +30,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           >
             <main className="min-h-screen flex flex-col items-center">
               {/* <main className="max-w-6xl min-h-screen mx-auto flex flex-col items-center"> */}
-              <Header />
+              <Navbar />
               {children}
               <Footer />
             </main>

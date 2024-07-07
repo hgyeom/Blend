@@ -1,5 +1,6 @@
 'use client'
 
+// import { useRouter } from 'next/navigation'
 import { FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 
@@ -27,58 +28,53 @@ const Login = ({ searchParams }: { searchParams: { message: string } }) => {
 
   return (
     <div className="flex items-center justify-center w-full h-screen">
-      <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-        {/* <Link
-          href="/"
-          className="absolute left-8 top-11 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Back
-        </Link> */}
-
+      <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-3">
+        <div className="flex flex-col gap-16 items-center">
+          <div className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
+            <div>
+              <a href="/" className="font-bold hover:underline">
+                Blend
+              </a>
+            </div>
+            Mix, Shared Life
+          </div>
+        </div>
         <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
-          <label htmlFor="email" className="text-md">
+          {/* html for에 입력해도 오류가 난다. eslint 원인 찾아보자. */}
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label className="text-md " htmlFor="email">
             Email
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-            />
           </label>
-          <label className="text-md" htmlFor="Nickname">
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label className="text-md" htmlFor="password">
+            Password
+          </label>
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+
+          {/* 닉네임은 자동 생성 > 나중에 수정 할 수 있도록 */}
+          {/* <label className="text-md" htmlFor="nickname">
             Nickname
             <input
               className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              name="Nickname"
-              placeholder="ABC"
+              id="nickname"
+              name="nickname"
+              placeholder="닉네임"
               required
             />
-          </label>
-          <label className="text-md" htmlFor="password">
-            Password
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              type="password"
-              name="password"
-              placeholder="••••••••"
-              required
-            />
-          </label>
+          </label> */}
           <SubmitButton
             formAction={signIn}
             className="bg-purple-700 text-white rounded-md px-4 py-2 text-foreground mb-2"

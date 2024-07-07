@@ -6,12 +6,6 @@ import { redirect } from 'next/navigation'
 // import { supabaseBrowser } from './client'
 import { supabaseServer } from './server'
 
-export const signOut = async () => {
-  const supabase = supabaseServer()
-  await supabase.auth.signOut()
-  return redirect('/login')
-}
-
 export const signIn = async (formData: FormData) => {
   'use server'
 
