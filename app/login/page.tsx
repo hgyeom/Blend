@@ -1,16 +1,25 @@
 'use client'
 
 // import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 
 import { Button } from '@/components/ui/button'
-import { signIn, signUp } from '@/utils/supabase/actions'
+import { emailCheck, signIn, signUp } from '@/utils/supabase/actions'
 import { supabaseBrowser } from '@/utils/supabase/client'
 
 import SubmitButton from './submit-button'
 
 const Login = ({ searchParams }: { searchParams: { message: string } }) => {
+  const [buttonStep, setButtonStep] = useState(0)
+
+  // 중복 확인 및 로그인, 회원가입 여부
+  const handleEmailCheck = async (formData: FormData) => {
+    const step = await emailCheck(formData)
+    setButtonStep(step)
+  }
+
   const handleLoginWithOAuth = (provider: 'github' | 'google') => {
     const supabase = supabaseBrowser()
     supabase.auth.signInWithOAuth({
@@ -39,6 +48,7 @@ const Login = ({ searchParams }: { searchParams: { message: string } }) => {
             Mix, Shared Life
           </div>
         </div>
+
         <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
           {/* html for에 입력해도 오류가 난다. eslint 원인 찾아보자. */}
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -52,45 +62,69 @@ const Login = ({ searchParams }: { searchParams: { message: string } }) => {
             placeholder="you@example.com"
             required
           />
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label className="text-md" htmlFor="password">
-            Password
-          </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            required
-          />
+          {buttonStep === 1 && (
+            <>
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className="text-md" htmlFor="password">
+                Password
+              </label>
+              <input
+                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                required
+              />
+            </>
+          )}
+          {buttonStep === 2 && (
+            <>
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className="text-md" htmlFor="password">
+                Password
+              </label>
+              <input
+                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                required
+              />
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className="text-md" htmlFor="nickname">
+                닉네임
+              </label>
+              <input
+                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                id="nickname"
+                name="nickname"
+                placeholder="닉네임"
+                required
+              />
+            </>
+          )}
 
-          {/* 닉네임은 자동 생성 > 나중에 수정 할 수 있도록 */}
-          {/* <label className="text-md" htmlFor="nickname">
-            Nickname
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              id="nickname"
-              name="nickname"
-              placeholder="닉네임"
-              required
-            />
-          </label> */}
+          {/* 이메일 check 결과에 따라 다른 렌더링. */}
+          {/* 에러 메시지 다음 눌렀을 때 사라지도록 변경하기 */}
           <SubmitButton
-            formAction={signIn}
+            // eslint-disable-next-line no-nested-ternary
+            formAction={buttonStep === 0 ? handleEmailCheck : buttonStep === 1 ? signIn : signUp}
             className="bg-purple-700 text-white rounded-md px-4 py-2 text-foreground mb-2"
-            pendingText="Signing In..."
+            pendingText={
+              // eslint-disable-next-line no-nested-ternary
+              buttonStep === 0 ? '중복 확인중' : buttonStep === 1 ? '로그인중' : '이메일 전송중'
+            }
           >
-            로그인
-          </SubmitButton>
-          <SubmitButton
-            formAction={signUp}
-            className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-            pendingText="Signing Up..."
-          >
-            회원가입
+            {
+              // eslint-disable-next-line no-nested-ternary
+              buttonStep === 0 ? '다음' : buttonStep === 1 ? '로그인' : '회원가입'
+            }
           </SubmitButton>
           {searchParams?.message && (
-            <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+            <p
+              style={{ whiteSpace: 'pre-line' }}
+              className="mt-4 p-4 bg-foreground/10 text-foreground text-center"
+            >
               {searchParams.message}
             </p>
           )}
