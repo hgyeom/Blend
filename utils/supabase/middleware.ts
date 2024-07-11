@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
+import { ProtectedPaths } from '@/lib/constnant'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
 export const updateSession = async (request: NextRequest) => {
@@ -102,8 +103,8 @@ export async function authCheckAndRedirect(request: NextRequest) {
     return supabaseResponse
   }
 
-  if (url.pathname === '/protected') {
-    return NextResponse.redirect(new URL('/login', request.url))
+  if (ProtectedPaths.some((path) => url.pathname.startsWith(path.replace('*', '')))) {
+    return NextResponse.redirect(new URL(`/login?next=${url.pathname}`, request.url))
   }
 
   // 나중에 글 등록 등 로그인 필요한 페이지로 이동할 경우

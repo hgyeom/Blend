@@ -1,6 +1,6 @@
 'use client'
 
-// import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
@@ -12,6 +12,9 @@ import { supabaseBrowser } from '@/utils/supabase/client'
 import SubmitButton from './submit-button'
 
 const Login = ({ searchParams }: { searchParams: { message: string } }) => {
+  // 접근 불가능한 페이지 접근 후 로그인 시 이전 페이지로 이동하기 위해 next 사용
+  const params = useSearchParams()
+  const next = params.get('next')
   const [buttonStep, setButtonStep] = useState(0)
 
   // 중복 확인 및 로그인, 회원가입 여부
@@ -26,7 +29,7 @@ const Login = ({ searchParams }: { searchParams: { message: string } }) => {
       provider,
       options: {
         // eslint-disable-next-line no-restricted-globals
-        redirectTo: `${location.origin}/auth/callback`,
+        redirectTo: `${location.origin}/auth/callback?next=${next}`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
