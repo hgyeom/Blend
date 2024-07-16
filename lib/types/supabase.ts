@@ -83,6 +83,7 @@ export type Database = {
           email: string | null
           id: string
           nickname: string | null
+          penname: string | null
           profile_url: string | null
           type: string | null
         }
@@ -91,6 +92,7 @@ export type Database = {
           email?: string | null
           id?: string
           nickname?: string | null
+          penname?: string | null
           profile_url?: string | null
           type?: string | null
         }
@@ -99,6 +101,7 @@ export type Database = {
           email?: string | null
           id?: string
           nickname?: string | null
+          penname?: string | null
           profile_url?: string | null
           type?: string | null
         }

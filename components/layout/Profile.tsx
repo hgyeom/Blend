@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 import useUser from '@/app/hooks/useUser'
 import { supabaseBrowser } from '@/utils/supabase/client'
@@ -14,6 +14,7 @@ const Profile = () => {
   const { isFetching, data } = useUser()
   const queryClient = useQueryClient()
   const router = useRouter()
+  const pathname = usePathname()
 
   if (isFetching) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -29,7 +30,7 @@ const Profile = () => {
   }
 
   return !data?.id ? (
-    <Link href="/login">
+    <Link href={`/login?next=${pathname}`}>
       <Button variant="outline">로그인</Button>
     </Link>
   ) : (
