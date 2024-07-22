@@ -77,7 +77,7 @@ export const signUp = async (formData: FormData) => {
 
   const data = await getUserWithPenname(penname)
 
-  if (!data) {
+  if (data) {
     const message = encodeURIComponent('필명이 중복되었습니다.')
     return redirect(`/login?message=${message}`)
   }
