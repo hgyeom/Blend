@@ -14,7 +14,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: 'BLEND',
-  description: ' Mix, Shared Life',
+  description: 'Mixing and Sharing Life',
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -32,7 +32,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <ToastProvider />
             <Navbar />
             {/* <main className="flex-auto w-full xl:w-4/5 min-h-screen flex flex-col items-center justify-center"> */}
-            <main className="max-w-6xl min-h-fit mx-auto flex flex-col items-center">
+            <main className="max-w-6xl w-4/5 min-h-fit mx-auto flex flex-col items-center">
               {children}
             </main>
             <Footer />
