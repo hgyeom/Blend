@@ -1,8 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { GiCoffeePot } from 'react-icons/gi'
 
 import ModeToggle from '@/components/ModeToggle'
 
@@ -17,7 +17,7 @@ const Navbar = () => {
   ) : (
     <nav className="w-full flex justify-center items-center border-b border-b-foreground/10 h-14">
       <Link href="/">
-        <GiCoffeePot size="40" />
+        <Image src="/imgs/logo.png" alt="Blend 로고" width={80} height={80} />
       </Link>
 
       <div className="w-full max-w-6xl flex justify-end items-center p-3 text-sm gap-4">

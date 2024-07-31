@@ -15,6 +15,9 @@ export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: 'BLEND',
   description: 'Mixing and Sharing Life',
+  icons: {
+    icon: '/imgs/favicon.png',
+  },
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

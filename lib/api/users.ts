@@ -53,11 +53,12 @@ export const signUp = async (formData: FormData) => {
   'use server'
 
   const origin = headers().get('origin')
+  const profileUrl = '/svgs/default_user.svg'
+  const next = formData.get('next') as string
   const email = formData.get('email') as string
   const password = formData.get('password') as string
   const nickname = formData.get('nickname') as string
   const penname = formData.get('penname') as string
-  const next = formData.get('next') as string
   const supabase = supabaseServer()
 
   const regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/
@@ -89,6 +90,7 @@ export const signUp = async (formData: FormData) => {
       data: {
         nickname,
         penname,
+        profile_url: profileUrl,
       },
       emailRedirectTo: `${origin}/auth/callback`,
     },

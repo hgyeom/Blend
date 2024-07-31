@@ -1,6 +1,6 @@
 // import { createClient } from '@/utils/supabase/server';
 
-import MainPage from '@/components/main/MainPage'
+import MainPage from '@/containers/main/MainPage'
 
 const Index = async () => {
   // supabase와 연결되어있는지 확인하는 함수
