@@ -97,7 +97,7 @@ const Login = ({ searchParams }: { searchParams: { message: string } }) => {
                 Blend
               </a>
             </div>
-            Mix, Shared Life
+            Mixing and Sharing Life
           </div>
         </div>
 
